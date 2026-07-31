@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<h2>ChatBot Admin Panel</h2>
+
+<input type="text" id="question" placeholder="Enter Question">
+<br><br>
+
+<input type="text" id="answer" placeholder="Enter Answer">
+<br><br>
+
+<button onclick="saveData()">
+    Save
+</button>
+<hr>
+
+<h2>All Questions</h2>
+
+<table border="1" cellpadding="10" id="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Question</th>
+        <th>Answer</th>
+    </tr>
+    </thead>
+
+    <tbody id="tableBody">
+
+    </tbody>
+
+</table>
+
+<script src="admin.js"></script>
+
+</body>
+</html>
