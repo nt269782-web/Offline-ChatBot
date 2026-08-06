@@ -16,34 +16,40 @@
     <groupId>com.nihal</groupId>
     <artifactId>chatbot</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+
     <name>chatbot</name>
     <description>Offline College ChatBot</description>
+
     <packaging>jar</packaging>
 
     <properties>
         <java.version>21</java.version>
     </properties>
 
+
     <dependencies>
 
-        <!-- Spring Boot Web -->
+        <!-- Spring Boot REST API -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Spring Boot JPA -->
+
+        <!-- Spring Data JPA -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
-        <!-- MySQL Driver -->
+
+        <!-- PostgreSQL Driver (Render Database) -->
         <dependency>
-            <groupId>com.mysql</groupId>
-            <artifactId>mysql-connector-j</artifactId>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
             <scope>runtime</scope>
         </dependency>
+
 
         <!-- Lombok -->
         <dependency>
@@ -52,13 +58,15 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Spring Boot DevTools -->
+
+        <!-- DevTools (Only Local Development) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
             <scope>runtime</scope>
             <optional>true</optional>
         </dependency>
+
 
         <!-- Testing -->
         <dependency>
@@ -69,10 +77,12 @@
 
     </dependencies>
 
+
     <build>
+
         <plugins>
 
-            <!-- Java Compiler -->
+            <!-- Java 21 Compiler -->
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
@@ -81,13 +91,16 @@
                 </configuration>
             </plugin>
 
-            <!-- Spring Boot -->
+
+            <!-- Spring Boot Build -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
         </plugins>
+
     </build>
+
 
 </project>
