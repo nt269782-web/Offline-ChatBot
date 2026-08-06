@@ -1,6 +1,10 @@
 package com.nihal.chatbot;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -14,36 +18,41 @@ public class AdminController {
     }
 
     @PostMapping("/save")
-    public String save(@RequestBody Message message) {
-
+    public ResponseEntity<String> save(@RequestBody Message message) {
         repository.save(message);
-
-        return "Saved Successfully";
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Saved Successfully");
     }
+
     @GetMapping("/all")
-    public java.util.List<Message> getAll() {
+    public List<Message> getAll() {
         return repository.findAll();
     }
+
     @DeleteMapping("/delete/{id}")
-    public String delete(@PathVariable Integer id) {
-        repository.deleteById(id);
-        return "Deleted Successfully";
-    }
-    @PutMapping("/update/{id}")
-    public String update(@PathVariable Integer id, @RequestBody Message message){
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
 
-        Message old = repository.findById(id).orElse(null);
-
-        if(old != null){
-
-            old.setQuestion(message.getQuestion());
-            old.setAnswer(message.getAnswer());
-
-            repository.save(old);
-
-            return "Updated Successfully";
+        if (!repository.existsById(id)) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Record Not Found");
         }
 
-        return "Record Not Found";
+        repository.deleteById(id);
+        return ResponseEntity.ok("Deleted Successfully");
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> update(@PathVariable Integer id,
+                                         @RequestBody Message message) {
+
+        return repository.findById(id)
+                .map(old -> {
+                    old.setQuestion(message.getQuestion());
+                    old.setAnswer(message.getAnswer());
+                    repository.save(old);
+                    return ResponseEntity.ok("Updated Successfully");
+                })
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body("Record Not Found"));
     }
 }

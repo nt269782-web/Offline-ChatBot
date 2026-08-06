@@ -1,6 +1,7 @@
 package com.nihal.chatbot;
 
 import org.springframework.web.bind.annotation.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,12 +27,8 @@ public class ChatController {
         if (data != null) {
             response.put("reply", data.getAnswer());
         } else {
-            response.put("reply", "Sorry, mujhe iska answer nahi pata.");
-        }
-        if (data != null) {
-            response.put("reply", data.getAnswer());
-        } else {
 
+            // Save unknown question
             Message msg = new Message();
             msg.setQuestion(message);
             msg.setAnswer("Pending");
@@ -40,6 +37,7 @@ public class ChatController {
 
             response.put("reply", "Sorry, mujhe iska answer nahi pata.");
         }
+
         return response;
     }
 }
